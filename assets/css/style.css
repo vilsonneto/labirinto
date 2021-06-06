@@ -2,6 +2,10 @@ body {
     background-color: #e7e7b9;
 }
 
+.hidden {
+    display: none;
+}
+
 /* Blocos e Linhas*/
 #labirinto {
     display: flex;
@@ -91,3 +95,99 @@ body {
 #box img {
     height: 48px;
 }
+
+/* Modal */
+
+.modal-fundo {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 1;
+    background: #0000009c;
+}
+
+.modal-fundo .modal {
+    margin: 25vh auto;
+    width: 45vw;
+    max-width: 550px;
+    border-radius: 10px;
+}
+
+.modal-fundo .modal figure {
+    width: fit-content;
+    max-width: 90%;
+    margin: 10px auto;
+}
+.modal-fundo .modal figure img {
+    max-width: 100%;
+    border: solid 1px transparent;
+    border-radius: 10px;
+}
+.modal-fundo .modal h3 {
+    text-align: center;
+    font-family: system-ui;
+}
+.modal-fundo .modal button {
+    margin: 14px auto;
+    padding: 0px 8px;
+    display: block;
+    height: 40px;
+    border: solid transparent;
+    border-radius: 4px;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.modal-fundo .modal button:focus {
+    outline: none;
+}
+
+
+/* Modais específicos */
+
+.modal-start {
+    background-color: #eaa7b3;
+    border: 3px solid #c24242;
+    color: brown;
+}
+
+.modal-start button{
+    color: darkred;
+    background: beige;
+}
+
+.modal-zenitsu {
+    background-color: rgb(245 245 119);
+    border: 3px solid #cc9200;
+    color: #cc9200;
+}
+
+.modal-zenitsu button{
+    color: gold;
+    background: #0000008a;
+}
+
+.modal-inosuke {
+    background-color: rgb(109, 109, 247);
+    border: 3px solid rgb(48, 48, 172);
+    color: rgb(48, 48, 172);
+}
+
+.modal-inosuke button{
+    color: rgb(57, 57, 218);
+    background: #0000008a;
+}
+
+.modal-tanjirou {
+    background-color: rgb(30 136 164);
+    border: 3px solid #c24242;
+    color: brown;
+}
+
+.modal-tanjirou button{
+    color: darkred;
+    background: beige;
+}
+

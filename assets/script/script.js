@@ -19,12 +19,10 @@ const map = [
 let cutMap = map.map((item) => item.split(""))
 let linha = "";
 
-
 const labirinto = document.getElementById("labirinto")
+const myBody = document.querySelector("body")
 
-let positionColuna = 0;
-let positionLinha = 9;
-
+// Função que cria um bloco
 const createBlock = (item) => {
     const newBlock = document.createElement("div")
     newBlock.classList.add("casa")
@@ -46,6 +44,9 @@ const createBlock = (item) => {
         newBlock.id = "start"
         newBlock.dataset.code = " "
         linha.appendChild(newBlock)
+
+        appendFigures("nezuko", "./assets/img/nezuko.png", "Nezuko", newBlock)
+        
     }
     if ( item === "B" ) {
         newBlock.id = "casa-box"
@@ -82,17 +83,8 @@ const createBlock = (item) => {
     
 }
 
-const appendFigures = ( id, src, alt, idAppend ) => {
-    let divFigure = document.createElement("div");
-    divFigure.id = id;
-    idAppend.appendChild(divFigure);
 
-    let imgFigure = document.createElement("img");
-    imgFigure.src = src;
-    imgFigure.alt = alt;
-    divFigure.appendChild(imgFigure)
-}
-
+// Função que cria uma linha
 const createLine = (item) => {
     linha = document.createElement("div");
     linha.classList.add("linha")
@@ -103,26 +95,37 @@ const createLine = (item) => {
     labirinto.appendChild(linha)
 }
 
-const createMap = () => {
-    cutMap.map(createLine)
+// Função que cria o mapa
+const createMap = (mapa, inicio) => {
+    mapa.map(createLine)
+    nezuko = document.getElementById("nezuko")
+    nezuko.classList.add("no-reverse")
+    createModal("modal-start", "./assets/img//nezuko-confusa.gif", "Nezuko confusa, com os olhos embaçados", "Nezuko confusa", "Nezuko se perdeu do Tanjirou e sua missão é ajuda-la!", "Começar!")
 }
 
-createMap()
+// Função que coloca um personagens em um bloco
+const appendFigures = ( id, src, alt, idAppend ) => {
+    let divFigure = document.createElement("div");
+    if ( id !== "") {
+        divFigure.id = id;
+    }
+    idAppend.appendChild(divFigure);
 
-let nezuko = document.createElement("div")
-nezuko.id = "nezuko"
-nezuko.classList.add("no-reverse")
-labirinto.appendChild(nezuko)
+    let imgFigure = document.createElement("img");
+    imgFigure.src = src;
+    imgFigure.alt = alt;
+    divFigure.appendChild(imgFigure)
+}
 
-nezuko = document.getElementById("nezuko")
-let imgNezuko = document.createElement("img");
-imgNezuko.src = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/d7342616-47df-4f4a-a9ff-adc5532cb145/ddj1k7i-2f1687e6-2b1b-4770-aa46-6ecc51b62be8.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2Q3MzQyNjE2LTQ3ZGYtNGY0YS1hOWZmLWFkYzU1MzJjYjE0NVwvZGRqMWs3aS0yZjE2ODdlNi0yYjFiLTQ3NzAtYWE0Ni02ZWNjNTFiNjJiZTgucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.ibSsDEKxFVLSXdJtZMbeYKaS4ZZxxUT2QeHv9RlPoB0"
-imgNezuko.alt = "Nezuko-chan"
-nezuko.appendChild(imgNezuko)
+createMap(cutMap)
+
+
 
 const blocks = document.querySelectorAll(".casa")
 
 let localAtual = 0;
+
+// Função que realiza a troca de posição da Nezuko
 const movimentNezuko = (index) => {
     let local = blocks[index]
     nezuko = document.getElementById("nezuko")
@@ -133,15 +136,17 @@ const movimentNezuko = (index) => {
 movimentNezuko(189)
  
 
-
+// Funções de movimento
 const moveUp = () => {
     let nextPosition = blocks[localAtual - 21 ].dataset["code"]
 
     if (nextPosition === "I") {
-        return alert("UuUWAAAARRAAGH!")
+        createModal("modal-inosuke", "./assets/img/nezuko-inosuke.gif", "Inosuke enlouquecido", "Nezuko encontrou com Inosuke", "Nezuko encontrou Inosuke", "Fugir desse Louco!")
     }
 
     if (nextPosition === "B") {
+        createModal("modal-start", "./assets/img/nezuko-caixa.gif", "Nezuko na", "Nezuko na caixa", "Nezuko encontrou sua caixa", "Voltar a procurar Tanjirou")
+
         return alert("Nezuko achou sua caixa.")
     }
 
@@ -170,10 +175,11 @@ const moveRight = () => {
     let nextPosition = blocks[localAtual + 1 ].dataset["code"]
 
     if (nextPosition === "Z") {
-        return alert("NEZUKO-CHAN!")
+        createModal("modal-zenitsu", "./assets/img/nezuko-zenitsu.gif", "Nezuko sendo assediada pelo Zenitsu", "Nezuko encontrou Zenitsu", "Nezuko encontrou Zenitsu", "Fugir do assédio")
     }
 
     if (nextPosition === "F") {
+        createModal("modal-tanjirou", "./assets/img/nezuko-tanjirou.gif", "Tanjirou fazendo carinho na Nezuko", "Nezuko encontrou com Tanjirou", "Você conseguiu! Nezuko está muito agradecido pela sua ajuda.", "Jogar de novo")
         return alert("Você ajudou a Nezuko a encontrar Tanjiro.")
     }
 
@@ -205,5 +211,45 @@ document.addEventListener("keydown", (event) => {
     }
 
 })
+
+
+
+function createModal (classModal, src, alt, figText, textDescripition, textButton ) {
+
+    let fundoModal = document.createElement("div")
+    fundoModal.classList.add("modal-fundo")
+    myBody.appendChild(fundoModal)
+    
+    let modal = document.createElement("div")
+    modal.classList.add("modal")
+    modal.classList.add( classModal )
+    fundoModal.appendChild(modal)
+    
+    let figure = document.createElement("figure")
+    modal.appendChild(figure)
+    
+    let gif = document.createElement("img")
+    gif.src = src
+    gif.alt = alt
+    figure.appendChild(gif)
+    
+    let figcaption = document.createElement("figcaption")
+    figcaption.classList.add("hidden")
+    figcaption.innerText = figText
+    figure.appendChild(figcaption)
+    
+    let textModal = document.createElement("h3")
+    textModal.innerText = textDescripition
+    modal.appendChild(textModal)
+    
+    let button = document.createElement("button")
+    button.innerText = textButton
+    modal.appendChild(button)
+
+}
+ 
+
+
+
 
 
