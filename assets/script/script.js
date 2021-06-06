@@ -146,8 +146,6 @@ const moveUp = () => {
 
     if (nextPosition === "B") {
         createModal("modal-start", "./assets/img/nezuko-caixa.gif", "Nezuko na", "Nezuko na caixa", "Nezuko encontrou sua caixa", "Voltar a procurar Tanjirou")
-
-        return alert("Nezuko achou sua caixa.")
     }
 
     if (nextPosition === " ") { 
@@ -180,7 +178,6 @@ const moveRight = () => {
 
     if (nextPosition === "F") {
         createModal("modal-tanjirou", "./assets/img/nezuko-tanjirou.gif", "Tanjirou fazendo carinho na Nezuko", "Nezuko encontrou com Tanjirou", "Você conseguiu! Nezuko está muito agradecido pela sua ajuda.", "Jogar de novo")
-        return alert("Você ajudou a Nezuko a encontrar Tanjiro.")
     }
 
     if (nextPosition === " ") { 
@@ -213,7 +210,7 @@ document.addEventListener("keydown", (event) => {
 })
 
 
-
+// Função que cria um modal
 function createModal (classModal, src, alt, figText, textDescripition, textButton ) {
 
     let fundoModal = document.createElement("div")
@@ -246,6 +243,20 @@ function createModal (classModal, src, alt, figText, textDescripition, textButto
     button.innerText = textButton
     modal.appendChild(button)
 
+    button.addEventListener("click", () => {
+        let getModal = document.querySelector(".modal-fundo");
+        return getModal.remove()
+    })
+
+    if (classModal === "modal-tanjirou") {
+
+        button.addEventListener("click", () => {
+            movimentNezuko(189)
+            createModal("modal-start", "./assets/img//nezuko-confusa.gif", "Nezuko confusa, com os olhos embaçados", "Nezuko confusa", "Nezuko se perdeu do Tanjirou e sua missão é ajuda-la!", "Começar!")
+        })
+
+    }
+    
 }
  
 

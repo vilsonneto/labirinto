@@ -2,6 +2,10 @@ body {
     background-color: #e7e7b9;
 }
 
+main {
+    margin-top: 8vh;
+}
+
 .hidden {
     display: none;
 }
